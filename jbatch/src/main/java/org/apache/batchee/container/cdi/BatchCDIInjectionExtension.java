@@ -17,7 +17,6 @@
 
 package org.apache.batchee.container.cdi;
 
-import javax.batch.operations.BatchRuntimeException;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
@@ -110,7 +109,7 @@ public class BatchCDIInjectionExtension implements Extension {
             try {
                 return (BeanManager) CDI_GET_BEAN_MANAGER_METHOD.invoke(CDI_CURRENT_METHOD.invoke(null));
             } catch (Exception e) {
-                throw new BatchRuntimeException("unable to resolve BeanManager");
+                // fallback if CDI isn't available
             }
         }
 
